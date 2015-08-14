@@ -1,0 +1,16 @@
+{
+    "name": "wsmwason/taiwan-bank-code",
+    "description": "Taiwan Bank Code List",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "wsmwason",
+            "email": "wsmwason@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.0.0"
+    }
+}
