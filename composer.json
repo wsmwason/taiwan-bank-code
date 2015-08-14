@@ -12,5 +12,10 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.0.0"
+    },
+    "autoload": {
+      "classmap": [
+        "TaiwanBankCode.php"
+      ]
     }
 }
