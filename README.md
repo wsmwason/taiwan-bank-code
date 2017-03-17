@@ -67,21 +67,6 @@ $taiwanBankCode->updateXmlFromFisc();
 $taiwanBankCode->convertJsonFromXml();
 ```
 
-### 關於 財金資訊股份有限公司 開放資料 的 HTML
-
-有些平台提供的檔案可能是因為 Windows .NET 平台的關係，提供連結的路徑是 "\" 反斜線，
-雖然 IE 跟 Chrome 都能正常轉為斜線並下載到檔案，
-但 Firefox 如果點了這個連結，只會原始的呈現為 `/\TC\OPENDATA\Comm1_MEMBER.csv`，
-最後的結果就是 404 找不到網頁，如果能遵循標準的 "/" 來放連結不是很好嗎？
-
-	<tr class="bg_01">
-		<td class="docName">跨行業務參加金融機構一覽</td>
-		<td><a class="doc-dl xls" title="下載 Excel" href="\TC\OPENDATA\Comm1_MEMBER.xls">Excel</a></td>
-		<td><a class="doc-dl pdf" title="下載 PDF" href="\TC\OPENDATA\Comm1_MEMBER.pdf">pdf</a></td>
-		<td><a class="doc-dl csv" title="下載 CSV" href="\TC\OPENDATA\Comm1_MEMBER.csv">csv</a></td>
-		<td><a class="doc-dl xml" title="下載 XML" href="\TC\OPENDATA\Comm1_MEMBER.xml">xml</a></td>
-	</tr>
-
 ### License
 
 The MIT License (MIT)
