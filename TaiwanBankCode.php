@@ -97,7 +97,7 @@ class TaiwanBankCode {
     }
     foreach($jsonArray as $type => $jsonData){
       $saveJsonFile = sprintf($this->jsonFile, $type);
-      file_put_contents($saveJsonFile, json_encode($jsonData));
+      file_put_contents($saveJsonFile, json_encode($jsonData, JSON_UNESCAPED_UNICODE));
       echo "Convert ".$saveJsonFile." success\n";
     }
   }
