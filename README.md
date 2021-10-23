@@ -1,4 +1,4 @@
-taiwan-bank-code 台灣銀行代碼清單
+# taiwan-bank-code 台灣銀行代碼清單
 
 ## 主要用途
 
