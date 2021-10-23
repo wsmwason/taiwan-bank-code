@@ -1,31 +1,58 @@
 taiwan-bank-code 台灣銀行代碼清單
-===
 
-提供台灣的銀行代碼清單 json 格式，資料來源為 [財金資訊股份有限公司](http://www.fisc.com.tw/TC/Default.aspx)
-的 [開放資料](http://www.fisc.com.tw/tc/knowledge/opendata.aspx) XML 檔案，
+## 主要用途
+
+提供台灣的銀行代碼清單 JSON 格式，資料來源為 [財金資訊股份有限公司](https://www.fisc.com.tw/TC/Default.aspx)
+的 [開放資料](https://www.fisc.com.tw/tc/knowledge/opendata.aspx) XML 檔案，
 透過 PHP 將 XML 轉換為 JSON 格式方便運用。
 
-### 關於此程式
+## 關於此程式
 
-雖然 [財金資訊股份有限公司](http://www.fisc.com.tw/TC/Default.aspx)
+雖然 [財金資訊股份有限公司](https://www.fisc.com.tw/TC/Default.aspx)
 的 [開放資料](http://www.fisc.com.tw/tc/knowledge/opendata.aspx)
 有提供完整的 XML 或 CSV 格式的清單，
-但其實內容包含了 `全國性繳費/稅業務-活期性帳戶繳費作業`、`外幣結算平台-美元`、 `通匯業務-證券匯款` 等各種不同類型的銀行代碼清單，
-一般情況下我們只會需要 `網路ATM` 或 `通匯業務-入戶電匯` 的類型即可，
-因此此程式擷取 XML 後只會將這兩個類型的清單處理為 JSON 格式的檔案。
+但其實內容包含了各種不同類型的銀行代碼清單：
 
-### 簡易使用方式
+  * 全國性繳費/稅業務-活期性帳戶繳費作業
+  * 外幣結算平台-美元
+  * 通匯業務-證券匯款
+  * 通匯業務-公庫匯款
+  * ...
 
- * listBankCodeATM()
- * listBankCodeTT()
+一般情況下我們只會需要 `網路ATM`、`通匯業務-入戶電匯` 或 `跨行自動化服務機器業務(金融卡)` 的類型即可，
+因此此程式下載 XML 後只會將這幾個類型的清單處理為 JSON 格式的檔案。
+
+## 安裝
+
+透過 Composer 安裝
+
+	composer require wsmwason/taiwan-bank-code
+
+## 簡易使用方式
+
+取得 `網路ATM` 銀行代碼清單
+
+```php
+$taiwanBankCode = new wsmwason\TaiwanBankCode();
+$bankCodeList = $taiwanBankCode->listBankCodeATM();
+```
+
+取得 `通匯業務-入戶電匯` 銀行代碼清單
+
+```php
+$taiwanBankCode = new wsmwason\TaiwanBankCode();
+$bankCodeList = $taiwanBankCode->listBankCodeTT();
+```
+
+取得 `跨行自動化服務機器業務(金融卡)` 銀行代碼清單
+
+```php
+$taiwanBankCode = new wsmwason\TaiwanBankCode();
+$bankCodeList = $taiwanBankCode->listBankCodeCrossATM();
+```
 
 只要 `data/` 目錄內含有 JSON 檔案，
 就能透過 `listBankCodeATM()` 或 `listBankCodeTT()` 取得銀行代碼清單。
-
-```php
-$taiwanBankCode = new TaiwanBankCode();
-$bankCodeATM = $taiwanBankCode->listBankCodeATM();
-```
 
 可取得 ATM 的 Array：
 
@@ -45,28 +72,34 @@ $bankCodeATM = $taiwanBankCode->listBankCodeATM();
 		...
     )
 
-或是自己把 `data/` 目錄的 `taiwanBankCodeATM.json` 或 `taiwanBankCodeTT.json` 拿來用。
+或是自己把 `data/` 目錄的 JSON 直接讀取來用。
 
-### 透過 Composer 安裝
+## 更新來源
 
-	"wsmwason/taiwan-bank-code": "*"
+本來是不想把 XML 放在專案內，
+不過台灣的銀行代碼異動應該不算是太頻繁，
+如果有更新時之後會再發布新版來更新 JSON 內容。
 
-### 更新來源 XML
+不過如果真的想直接更新的話，還是可以用 `TaiwanBankCodeDataUpdate` 來下載 XML 以及轉換 JSON 格式檔案，
+如果真的有更新可以順手發個 PR 發布新版。
 
-為了確保台灣銀行有變動時可以獲取最新資訊，Source Code 裡面不包含開放資料的 XML 檔案，
-要更新 XML 可透過 `updateXmlFromFisc()` 進行獲取更新，並透過 `convertJsonFromXml()`
-來轉換為最新的 JSON 格式檔案。
+執行下載 XML 及轉換 JSON
 
 ```php
-$taiwanBankCode = new TaiwanBankCode();
+$taiwanBankCodeDataUpdate = new wsmwason\TaiwanBankCodeDataUpdate();
 
-// Update XML
-$taiwanBankCode->updateXmlFromFisc();
+// Download XML
+$taiwanBankCodeDataUpdate->updateXmlFromFisc();
 
 // Convert to Json
-$taiwanBankCode->convertJsonFromXml();
+$taiwanBankCodeDataUpdate->convertJsonFromXml();
 ```
 
-### License
+## 版本紀錄
+
+  **1.0.0**
+  正式釋出
+
+## License
 
 The MIT License (MIT)
